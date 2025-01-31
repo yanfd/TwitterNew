@@ -1,0 +1,2 @@
+# TwitterNew
+接入twitter的API实现命令行发表推文的小型程序
