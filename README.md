@@ -1,25 +1,103 @@
-# YPclutter
-remake of yanPython folder
+# Twitter的小型Cli应用
+english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README.md) 
 
-放置一些小型项目的笔记/优化版本
+[TOC]
 
 
 
 使用Twitter的X API v2。
 
-<table>
-  <tr>
-  <td align="center">
-        <a href="https://github.com/yanfd/YPclutter/blob/main/twitter_new.py">
-            <sub><b>Twitter_new</b></sub>
-        </a>
-</td>
-  </tr>
-</table>
+- [x] greetings
+- [x] 推文发送
+- [ ] 图像插入
+
+其他如查看回复/转发等操作较为繁琐，效率不如网站。
+
+这边集成了Alfred调用应用的workflow所以能做到一键发表，程序本身仍需在命令行运行。
 
 
 
+### 使用
+
+#### 下载项目
+
+```
+git clone https://github.com/yanfd/TwitterNew.git
+```
+
+cd切换到对应目录
 
 
 
+#### 安装依赖库
 
+安装前建议启动虚拟环境。
+
+```shell
+source twienv/bin/activate
+```
+
+- tweepy：X的官方开发库
+- pyfiglet：用于banner生成
+- prompt_toolkit：文字编辑区域，比input好使
+
+```shell
+pip3 install tweepy pyfiglet prompt_toolkit
+```
+
+
+
+#### 获取自己的推特密钥
+
+登陆[X Developer Portal](https://developer.twitter.com/en/portal/projects/) ，注册/登陆/创建应用
+
+生成 API_KEY，API_SECRET，ACCESS_TOKEN，ACCESS_TOKEN_SECRET
+
+在setting中将
+
+![](https://p.ipic.vip/ld3oje.png)
+
+设置为**可读并可写**
+
+![](https://p.ipic.vip/cft2y9.png)
+
+下面三个required随便填写。
+
+
+
+程序为安全需要把推特密钥放置到了环境变量里。
+
+获取完的keys，添加至.bashrc或.zshrc环境配置文件中(取决于你用的shell是哪种类型)
+
+```
+export 'BEARER_TOKEN'='$YOUR_BEARER'
+export 'API_KEY'='$your_api_key'
+export 'API_SECRET'='$your_api_secret'
+export 'ACCESS_TOKEN'='$your_access_token'
+export 'ACCESS_TOKEN_SECRET'='$your_access_token_secret'
+```
+
+source ~/.bashrc 
+
+⬆️加载配置文件
+
+
+
+**运行成功be like：**
+
+```
+python3 twitter_new.py
+```
+
+![](https://p.ipic.vip/t17eoa.png)
+
+deactivate退出虚拟环境
+
+
+
+### 可能出现的问题
+
+- apikeys在生成时一般只会出现一次。请自己备份好
+- 提示权限不足只能读取有限endpoint，说明没有设置为可读并可写
+- 依赖库建议安装在虚拟环境中。如果是全剧环境可能会报危
+- 其他请进行issues提交
