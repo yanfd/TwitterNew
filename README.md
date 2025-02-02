@@ -1,5 +1,5 @@
 # Twitter的小型Cli应用
-english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README.md) 
+english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README_EN.md) 
 
 [TOC]
 
