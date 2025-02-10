@@ -64,7 +64,7 @@ def show_banner():
     print("\033[36m" + f.renderText('NEW TWEETS') + "\033[0m")
     print(f"{greeting} \n timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("-" * 50)
-    
+
 # 修改后的主程序
 if __name__ == "__main__":
     show_banner()
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         
         # 输入图片路径
         media_input = session.prompt(
-            "📷 Attach images (space-separated paths, empty to skip): "
+            "📷 Attach images (space-separated paths, empty to skip):\n "
         ).strip()
 
         media_paths = media_input.split() if media_input else None
