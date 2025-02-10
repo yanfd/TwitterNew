@@ -7,9 +7,14 @@
 
 Using Twitter's X API v2.
 
+Feb10 update, adding image insertion function:)
+My needs have been met. If you have any other questions, please feel free to submit an issue
+
+---
+
 - [x] Greetings
 - [x] Tweet Posting
-- [ ] Image Insertion
+- [x] Image Insertion
 
 Other operations like viewing replies/retweets are cumbersome and less efficient than the website.
 

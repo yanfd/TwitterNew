@@ -7,9 +7,17 @@ english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README_EN.md
 
 使用Twitter的X API v2。
 
+Feb 10更新，增加图像插入功能:)
+
+已满足本人需求，有其他问题欢迎提交issue
+
+---
+
+
+
 - [x] greetings
 - [x] 推文发送
-- [ ] 图像插入
+- [x] 图像插入
 
 其他如查看回复/转发等操作较为繁琐，效率不如网站。
 
