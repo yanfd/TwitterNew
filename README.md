@@ -91,11 +91,21 @@ source ~/.bashrc
 
 
 
-**运行成功be like：**
+**运行**
 
 ```
 python3 twitter_new.py
 ```
+
+- 输入文本后，ESC+Enter下一步
+
+- 插入图片，需绝对路径（可选）
+
+- 继续ESC+Enter结束
+
+  
+
+![](https://p.ipic.vip/a0r0x6.png)
 
 ![](https://p.ipic.vip/t17eoa.png)
 
@@ -106,6 +116,6 @@ deactivate退出虚拟环境
 ### 可能出现的问题
 
 - apikeys在生成时一般只会出现一次。请自己备份好
-- 提示权限不足只能读取有限endpoint，说明没有设置为可读并可写
+- 提示权限不足只能读取有限endpoint，说明没有设置为**可读并可写**
 - 依赖库建议安装在虚拟环境中。如果是全剧环境可能会报危
 - 其他请进行issues提交

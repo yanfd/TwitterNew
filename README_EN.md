@@ -5,8 +5,7 @@
 
 
 
-Using Twitter's X API v2.
-
+Use Twitter's X API v2.
 Feb10 update, adding image insertion function:)
 My needs have been met. If you have any other questions, please feel free to submit an issue
 
@@ -81,6 +80,12 @@ Run `source ~/.bashrc` to load the configuration file.
 ```
 python3 twitter_new.py
 ```
+
+- After entering the text, ESC+Enter next step
+
+- Insert image(optional) absolute path required 
+
+- Continue ESC+Enter to end
 
 ![](https://p.ipic.vip/t17eoa.png)
 
