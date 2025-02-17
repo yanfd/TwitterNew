@@ -53,11 +53,11 @@ def show_banner():
     # 动态问候语
     hour = datetime.now().hour
     if 5 <= hour < 12:
-        greeting = "🌧️ Mornin. Anything wanna share? :)"
+        greeting = "🌧️ Mornin \nAnything wanna share? :)"
     elif 12 <= hour < 18:
-        greeting = "🌆 Good afternoon, anything wanna share? :)"
+        greeting = "🌆 Good afternoon \nanything wanna share? :)"
     else:
-        greeting = "🌌 late at night. anything wanna share? :)"
+        greeting = "🌌 late at night. \nanything wanna share? :)"
     return greeting
     # # 生成 ASCII 艺术字
     # f = Figlet(font='slant')
@@ -106,9 +106,31 @@ class twitter_create(ctk.CTk):
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.main_frame.pack(expand=True, fill="both", padx=20, pady=20)
 
+        
+
+        #greetings
         greetings = show_banner()
-        label1 = ctk.CTkLabel(self, text=f'{greetings}').pack(padx=10, pady=10)
-        insert_image_button = ctk.CTkButton(self, text="Insert Image").pack(padx=10, pady=10)
+        self.label1 = ctk.CTkLabel(
+            self.main_frame, 
+            text=f'{greetings}',
+            font=("Microsoft YaHei", 18, "bold"),
+            text_color="white"
+            ).pack(expand=False, fill="both", padx=20, pady=20)
+        
+
+        #text entry
+        self.text_entry = ctk.CTkEntry(
+            self.main_frame,
+            placeholder_text="Anything wanna share? :)",
+            border_color="#3498db",
+            border_width=1,
+            fg_color="transparent",
+            corner_radius=8
+        )
+        self.text_entry.pack(expand=False, fill="both", padx=0, pady=0)  
+
+
+        insert_image_button = ctk.CTkButton(self.main_frame, text="Insert Image")
         
     def _set_window_geometry(self):
         """设置窗口位置和大小"""
