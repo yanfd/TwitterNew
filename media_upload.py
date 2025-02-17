@@ -4,7 +4,7 @@ from pyfiglet import Figlet
 import os
 from prompt_toolkit import prompt
 from prompt_toolkit import PromptSession
-
+import customtkinter as ctk
 # 新增v1客户端认证（用于媒体上传）
 def get_v1_client():
     auth = tweepy.OAuth1UserHandler(
@@ -58,33 +58,70 @@ def show_banner():
         greeting = "🌆 Good afternoon, anything wanna share? :)"
     else:
         greeting = "🌌 late at night. anything wanna share? :)"
-
-    # 生成 ASCII 艺术字
-    f = Figlet(font='slant')
-    print("\033[36m" + f.renderText('NEW TWEETS') + "\033[0m")
-    print(f"{greeting} \n timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("-" * 50)
+    return greeting
+    # # 生成 ASCII 艺术字
+    # f = Figlet(font='slant')
+    # print("\033[36m" + f.renderText('NEW TWEETS') + "\033[0m")
+    # print(f"{greeting} \n timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    # print("-" * 50)
 
 # 修改后的主程序
-if __name__ == "__main__":
-    show_banner()
+# if __name__ == "__main__":
+    # show_banner()
     
-    try:
-        session = PromptSession()
-        # 输入文本
-        tweet_text = session.prompt("Tweet text (Esc+Enter to finish): \n", multiline=True)
+    # try:
+    #     session = PromptSession()
+    #     # 输入文本
+    #     tweet_text = session.prompt("Tweet text (Esc+Enter to finish): \n", multiline=True)
         
-        # 输入图片路径
-        media_input = session.prompt(
-            "📷 Attach images (space-separated paths, empty to skip):\n "
-        ).strip()
+    #     # 输入图片路径
+    #     media_input = session.prompt(
+    #         "📷 Attach images (space-separated paths, empty to skip):\n "
+    #     ).strip()
 
-        media_paths = media_input.split() if media_input else None
+    #     media_paths = media_input.split() if media_input else None
         
-        if not tweet_text.strip() and not media_paths:
-            print("\033[33mEmpty input, cancelled.\033[0m")
-        else:
-            send_tweet_v2(tweet_text, media_paths)
+    #     if not tweet_text.strip() and not media_paths:
+    #         print("\033[33mEmpty input, cancelled.\033[0m")
+    #     else:
+    #         send_tweet_v2(tweet_text, media_paths)
             
-    except KeyboardInterrupt:
-        print("\n\033[33mCANCELLED. SEE YA.\033[0m")
+    # except KeyboardInterrupt:
+    #     print("\n\033[33mCANCELLED. SEE YA.\033[0m")
+
+#---------------------------------------
+#GUI code
+#---------------------------------------
+
+class twitter_create(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+
+        #window
+        self.title("TwitterNew")
+        self._set_window_geometry()
+        self._set_appearance_mode("dark")
+        
+        #main frame
+        self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
+        self.main_frame.pack(expand=True, fill="both", padx=20, pady=20)
+
+        greetings = show_banner()
+        label1 = ctk.CTkLabel(self, text=f'{greetings}').pack(padx=10, pady=10)
+        insert_image_button = ctk.CTkButton(self, text="Insert Image").pack(padx=10, pady=10)
+        
+    def _set_window_geometry(self):
+        """设置窗口位置和大小"""
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        window_width = 400
+        window_height = 450
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 4  # 偏上方
+        self.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        self.resizable(False, False)
+
+
+if __name__ == "__main__":
+    app = twitter_create()
+    app.mainloop()
