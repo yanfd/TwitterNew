@@ -7,6 +7,14 @@ english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README_EN.md
 
 使用Twitter的X API v2。
 
+Feb17更新，加装GUI玩玩，未merge于main branch. 
+
+import CTkinter
+
+---
+
+
+
 Feb 10更新，增加图像插入功能:)
 
 已满足本人需求，有其他问题欢迎提交issue
