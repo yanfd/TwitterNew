@@ -101,6 +101,9 @@ class twitter_create(ctk.CTk):
         self.title("TwitterNew")
         self._set_window_geometry()
         self._set_appearance_mode("dark")
+        #transparent all
+        self.attributes('-alpha', 0.8)
+
         
         #main frame
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
@@ -119,18 +122,35 @@ class twitter_create(ctk.CTk):
         
 
         #text entry
-        self.text_entry = ctk.CTkEntry(
+        self.text_box = ctk.CTkTextbox(
             self.main_frame,
-            placeholder_text="Anything wanna share? :)",
-            border_color="#3498db",
-            border_width=1,
+            # placeholder_text="Anything wanna share? :)",
+            border_color="white",
+
+            border_width=2,
             fg_color="transparent",
             corner_radius=8
         )
-        self.text_entry.pack(expand=False, fill="both", padx=0, pady=0)  
+        self.text_box.pack(expand=False, fill="both", padx=0, pady=5)  
 
 
-        insert_image_button = ctk.CTkButton(self.main_frame, text="Insert Image")
+        # self.insert_image_button = ctk.CTkButton(self.main_frame, text="Insert Image")
+        # self.insert_image_button.pack(expand=False, fill="both", padx=0, pady=0)
+
+        #image insert
+        self.insert_image_test = ctk.CTkCheckBox(self.main_frame, text="Insert Image",onvalue=True, offvalue=False)
+        self.insert_image_test.pack(expand=False, fill="both", padx=0, pady=5)
+        
+        
+
+        self.send_button = ctk.CTkButton(
+            self.main_frame, 
+            text="SEND", 
+            corner_radius=32, 
+            # command=self.sending,
+            fg_color="black",border_color="white",border_width=1
+        )
+        self.send_button.pack(expand=False, fill="both", padx=0, pady=5)
         
     def _set_window_geometry(self):
         """设置窗口位置和大小"""
@@ -142,6 +162,16 @@ class twitter_create(ctk.CTk):
         y = (screen_height - window_height) // 4  # 偏上方
         self.geometry(f"{window_width}x{window_height}+{x}+{y}")
         self.resizable(False, False)
+
+    # def sending(self):
+    #     tweet_text = self.text_box.get("1.0", "end-1c")
+    #     try:
+    #         if not tweet_text.strip() and not media_paths:
+    #             print("\033[33mEmpty input, cancelled.\033[0m")
+    #         else:
+    #             send_tweet_v2(tweet_text, media_paths)
+    #     except KeyboardInterrupt:
+    #         print("\n\033[33mCANCELLED. SEE YA.\033[0m")
 
 
 if __name__ == "__main__":
