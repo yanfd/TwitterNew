@@ -7,9 +7,19 @@ english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README_EN.md
 
 使用Twitter的X API v2。
 
+Feb20 updated.  
+
+import PyQT
+
+![](https://p.ipic.vip/4plfjp.png)
+
+---
+
 Feb17更新，加装GUI玩玩，未merge于main branch. 
 
 import CTkinter
+
+![](https://p.ipic.vip/64r610.png)
 
 ---
 
