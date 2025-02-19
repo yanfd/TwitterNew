@@ -5,6 +5,7 @@ import os
 from prompt_toolkit import prompt
 from prompt_toolkit import PromptSession
 import customtkinter as ctk
+from tkinter import filedialog
 # 新增v1客户端认证（用于媒体上传）
 def get_v1_client():
     auth = tweepy.OAuth1UserHandler(
@@ -134,12 +135,30 @@ class twitter_create(ctk.CTk):
         self.text_box.pack(expand=False, fill="both", padx=0, pady=5)  
 
 
-        # self.insert_image_button = ctk.CTkButton(self.main_frame, text="Insert Image")
-        # self.insert_image_button.pack(expand=False, fill="both", padx=0, pady=0)
-
         #image insert
-        self.insert_image_test = ctk.CTkCheckBox(self.main_frame, text="Insert Image",onvalue=True, offvalue=False)
-        self.insert_image_test.pack(expand=False, fill="both", padx=0, pady=5)
+        def file_label_update(file_name):
+            self.file_label.config(text=f"{file_name} selected")
+        self.file_label = ctk.CTkLabel(
+            self.main_frame,
+            text="No file selected",
+            text_color="white"
+        )
+        self.file_label.pack(expand=False, side = "left", padx=0, pady=5)
+
+        self.insert_image_button = ctk.CTkButton(
+            self.main_frame, 
+            corner_radius=32, 
+            fg_color="black",
+            border_color="white",
+            border_width=1,
+            text="Insert Image",
+            command=self.file_uploading
+            )
+        self.insert_image_button.pack(expand=False, side="right",padx=10, pady=5)
+
+
+        # self.insert_image_test = ctk.CTkCheckBox(self.main_frame, text="Insert Image",onvalue=True, offvalue=False)
+        # self.insert_image_test.pack(expand=False, fill="both", padx=0, pady=5)
         
         
 
@@ -151,6 +170,18 @@ class twitter_create(ctk.CTk):
             fg_color="black",border_color="white",border_width=1
         )
         self.send_button.pack(expand=False, fill="both", padx=0, pady=5)
+    
+    def file_uploading(self):
+        global media_paths 
+        media_paths = []
+        file_path = filedialog.askopenfilename(
+            title="select the pic you wanna share:",
+            filetypes=[("Images", "*.jpg *.png *.jpeg")],
+            initialdir=os.path.expanduser("~/Users/yanfengwu/Downloads")
+        )
+        if file_path:
+            media_paths.append(file_path)
+        
         
     def _set_window_geometry(self):
         """设置窗口位置和大小"""
