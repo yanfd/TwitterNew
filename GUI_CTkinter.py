@@ -68,8 +68,7 @@ def show_banner():
     # print(f"{greeting} \n timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     # print("-" * 50)
 
-app = ctk.CTk()
-app.overrideredirect(True)
+
 #---------------------------------------
 #GUI code
 #---------------------------------------
@@ -83,7 +82,7 @@ class twitter_create(ctk.CTk):
         self._set_window_geometry()
         self._set_appearance_mode("dark")
         #transparent all
-        self.overrideredirect(True)
+        # self.overrideredirect(True)
         self.attributes('-alpha', 0.8)
 
         
