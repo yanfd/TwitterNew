@@ -122,25 +122,24 @@ class twitter_create(ctk.CTk):
         #image insert
         def file_uploading():
             
-            file_path = filedialog.askopenfilename(
+            file_paths = filedialog.askopenfilenames(
                 title="select the pic you wanna share:",
                 filetypes=[("Images", "*.jpg *.png *.jpeg")],
                 initialdir=os.path.expanduser("~/Users/yanfengwu/Downloads")
             )
-            if file_path:
-                self.media_paths = []
-                self.media_paths.append(file_path)  
-                if len(file_path) > 10:
-                    try:
-                        file_path.split("/")[-1]
-                        file_path =  "..." + file_path[-10:]
-                    except Exception as e:
+            if file_paths:
+                self.media_paths = file_paths
+                try:
+                    file_label_update(f"{len(file_paths)} PICS SELECTED.")
+                    status_label_update("Image selected.")
+                except Exception as e:
                         print(e)
-                file_label_update(file_path)
-                status_label_update("Image selected.")
+                        status_label_update("Failed.")
+
                 
-        def file_label_update(file_name):
-            self.file_label.configure(text=f"{file_name} selected.")
+        def file_label_update(display_text):
+            self.file_label.configure(text=f"{display_text}")
+
         self.file_label = ctk.CTkLabel(
             self.image_frame,
             text="ANY PICS?",
