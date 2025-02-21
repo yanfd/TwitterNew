@@ -5,25 +5,42 @@ english version [ENG](https://github.com/yanfd/TwitterNew/blob/main/README_EN.md
 
 
 
+## Update Available V1.1.0 🚀
+
 使用Twitter的X API v2。
+
+### version
+
+- main branch
+  - twitter_new.py 以Cli方式运行
+- feature
+  - GUI_CTkinter.py 以桌面程式运行
+
+### 功能
+
+- [x] greetings
+- [x] 推文发送
+- [x] 图像插入
+- [x] GUI
+- [x] mockup背景
+
+![](https://p.ipic.vip/eo9v36.png)
+
+![](https://p.ipic.vip/5t3qjo.png)
+
+---
+
+Feb22 update(CTkinter版本)
+
+import PIL实现mockup
 
 Feb20 updated.  
 
 import PyQT
 
-![](https://p.ipic.vip/4plfjp.png)
-
----
-
 Feb17更新，加装GUI玩玩，未merge于main branch. 
 
 import CTkinter
-
-![](https://p.ipic.vip/64r610.png)
-
----
-
-
 
 Feb 10更新，增加图像插入功能:)
 
@@ -33,13 +50,9 @@ Feb 10更新，增加图像插入功能:)
 
 
 
-- [x] greetings
-- [x] 推文发送
-- [x] 图像插入
-
 其他如查看回复/转发等操作较为繁琐，效率不如网站。
 
-这边集成了Alfred调用应用的workflow所以能做到一键发表，程序本身仍需在命令行运行。
+方便的话可以集成Alfred的workflow
 
 
 
