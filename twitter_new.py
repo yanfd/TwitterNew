@@ -1,9 +1,3 @@
-import tweepy
-from datetime import datetime
-from pyfiglet import Figlet 
-import os
-from prompt_toolkit import prompt
-
 """
 将以下内容添加到 .bashrc 或 .zshrc 文件中,取决于你用的shell是哪种类型
 adding following stuff to .bashrc or .zshrc file, depending on which shell you are using
@@ -17,23 +11,56 @@ export 'ACCESS_TOKEN_SECRET'='$your_access_token_secret'
 source ~/.bashrc 
 加载配置文件
 """
+import tweepy
+from datetime import datetime
+from pyfiglet import Figlet 
+import os
+from prompt_toolkit import prompt
+from prompt_toolkit import PromptSession
 
-def send_tweet_v2(text):
-    
-    # 创建 v2 客户端
-    client = tweepy.Client(
-       consumer_key=os.environ.get("API_KEY"),
+# 新增v1客户端认证（用于媒体上传）
+def get_v1_client():
+    auth = tweepy.OAuth1UserHandler(
+        consumer_key=os.environ.get("API_KEY"),
         consumer_secret=os.environ.get("API_SECRET"),
         access_token=os.environ.get("ACCESS_TOKEN"),
         access_token_secret=os.environ.get("ACCESS_TOKEN_SECRET")
     )
+    return tweepy.API(auth)
+
+def send_tweet_v2(text, media_paths=None):
+    # 初始化两个客户端
+    client_v2 = tweepy.Client(
+        consumer_key=os.environ.get("API_KEY"),
+        consumer_secret=os.environ.get("API_SECRET"),
+        access_token=os.environ.get("ACCESS_TOKEN"),
+        access_token_secret=os.environ.get("ACCESS_TOKEN_SECRET")
+    )
+    
+    api_v1 = get_v1_client()
+    media_ids = []
+
+    # 上传媒体文件
+    if media_paths:
+        for path in media_paths:
+            if not os.path.exists(path):
+                print(f"⚠️ File not found: {path}")
+                continue
+            try:
+                media = api_v1.media_upload(filename=path)
+                media_ids.append(media.media_id)
+                print(f"🖼️ Media uploaded: {path}")
+            except Exception as e:
+                print(f"❌ Failed to upload {path}: {e}")
 
     try:
-        # 调用 v2 的创建推文接口
-        response = client.create_tweet(text=text)
-        print(f"PUBLISHED. ID: {response.data['id']}")
+        response = client_v2.create_tweet(
+            text=text,
+            media_ids=media_ids if media_paths else None
+        )
+        print(f"✅ PUBLISHED. ID: {response.data['id']}")
     except tweepy.TweepyException as e:
-        print(f"FAILED: {e}")
+        print(f"❌ FAILED: {e}")
 
 def show_banner():
     # 动态问候语
@@ -51,16 +78,26 @@ def show_banner():
     print(f"{greeting} \n timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("-" * 50)
 
+# 修改后的主程序
 if __name__ == "__main__":
-    show_banner()  # 显示终端横幅
+    show_banner()
     
     try:
+        session = PromptSession()
+        # 输入文本
+        tweet_text = session.prompt("Tweet text (Esc+Enter to finish): \n", multiline=True)
         
-        tweet_text = prompt("Start typing your tweet: \n ")
-        if len(tweet_text.strip()) == 0:
-            print("\033[33m empty input, cancelled.\033[0m")
+        # 输入图片路径
+        media_input = session.prompt(
+            "📷 Attach images (space-separated paths, empty to skip):\n "
+        ).strip()
+
+        media_paths = media_input.split() if media_input else None
+        
+        if not tweet_text.strip() and not media_paths:
+            print("\033[33mEmpty input, cancelled.\033[0m")
         else:
-            final_text = f"{tweet_text}"
-            send_tweet_v2(final_text)
+            send_tweet_v2(tweet_text, media_paths)
+            
     except KeyboardInterrupt:
         print("\n\033[33mCANCELLED. SEE YA.\033[0m")
