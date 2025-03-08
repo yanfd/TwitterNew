@@ -1,0 +1,3 @@
+([('tc',
+   '/Users/yanfengwu/Downloads/GitWorkspace/TwitterNew/dist/tc',
+   'EXECUTABLE')],)
